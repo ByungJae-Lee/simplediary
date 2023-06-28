@@ -76,4 +76,4 @@ export default DiaryEditor;
 
 // 오늘의 commit
 // 입력이 되지 않았을 때 focus효과 나타내기
-//
+// 배열을 이용하여 React에서 List를 렌더링 해보고 개별적인 컴포넌트를 만들 것
