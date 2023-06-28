@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const DiaryEditor = () => {
+  const authorInput = useRef();
+  const contentInput = useRef();
+
   // author, content 합치기
   const [state, setState] = useState({
     author: "",
@@ -15,9 +18,17 @@ const DiaryEditor = () => {
     });
   };
 
+  // 일기장 버튼
   const handleSubmit = () => {
-    console.log(state);
-    alert("저장 성공");
+    if (state.author.length < 1) {
+      authorInput.current.focus();
+      return;
+    }
+    if (state.content.length < 5) {
+      contentInput.current.focus();
+      return;
+    }
+    alert("저장 성공!");
   };
 
   return (
@@ -25,6 +36,7 @@ const DiaryEditor = () => {
       <h2>오늘의 일기</h2>
       <div>
         <input
+          ref={authorInput}
           name="author"
           value={state.author}
           onChange={handleChangeState}
@@ -32,6 +44,7 @@ const DiaryEditor = () => {
       </div>
       <div>
         <textarea
+          ref={contentInput}
           name="content"
           value={state.content}
           onChange={handleChangeState}
@@ -61,5 +74,6 @@ const DiaryEditor = () => {
 
 export default DiaryEditor;
 
-// 사용된 개념
-// <input value, onchange, onchange의 e >
+// 오늘의 commit
+// 입력이 되지 않았을 때 focus효과 나타내기
+//
