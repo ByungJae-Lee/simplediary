@@ -1,15 +1,15 @@
 import { useRef, useState } from "react";
 
-const DiaryEditor = () => {
-  const authorInput = useRef();
-  const contentInput = useRef();
-
+const DiaryEditor = ({ onCreate }) => {
   // author, content 합치기
   const [state, setState] = useState({
     author: "",
     content: "",
     emotion: 1,
   });
+
+  const authorInput = useRef();
+  const contentInput = useRef();
   // onchange 통합본
   const handleChangeState = (e) => {
     setState({
@@ -28,7 +28,14 @@ const DiaryEditor = () => {
       contentInput.current.focus();
       return;
     }
+
+    onCreate(state.author, state.content, state.emotion);
     alert("저장 성공!");
+    setState({
+      author: "",
+      content: "",
+      emotion: 1,
+    });
   };
 
   return (
