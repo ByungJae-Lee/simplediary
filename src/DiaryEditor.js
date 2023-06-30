@@ -80,6 +80,3 @@ const DiaryEditor = ({ onCreate }) => {
 };
 
 export default DiaryEditor;
-
-// 오늘의 commit
-// 리스트 데이터 삭제하기
