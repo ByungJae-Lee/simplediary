@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
@@ -54,7 +54,7 @@ const App = () => {
   }, []);
 
   // 일기데이터 추가함수
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback((author, content, emotion) => {
     const create_date = new Date().getTime();
     const newItem = {
       author,
@@ -64,11 +64,10 @@ const App = () => {
       id: dataId.current,
     };
     dataId.current += 1;
-    setData([newItem, ...data]);
-  };
+    setData((data) => [newItem, ...data]);
+  }, []);
   // 일기데이터 삭제함수
   const onRemove = (targetId) => {
-    console.log(`${targetId}가 삭제되었습니다`);
     const newDiaryList = data.filter((it) => it.id !== targetId);
     setData(newDiaryList);
   };
@@ -82,8 +81,6 @@ const App = () => {
   };
 
   const getDiaryAnalysis = useMemo(() => {
-    console.log("일기 분석 시작");
-
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio = (goodCount - data.length) * 100;
@@ -106,7 +103,3 @@ const App = () => {
 };
 
 export default App;
-
-// 리스트데이터 수정
-// 배열을 이용한 React List에 아이템을 동적으로 수정해보기
-// With 조건부 렌더링
