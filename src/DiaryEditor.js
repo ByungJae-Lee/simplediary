@@ -1,10 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
 const DiaryEditor = ({ onCreate }) => {
-  useEffect(() => {
-    console.log("DiaryEditor 렌더");
-  });
-
   // author, content 합치기
   const [state, setState] = useState({
     author: "",
