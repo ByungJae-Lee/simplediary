@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryEditor = ({ onCreate }) => {
-  // author, content 합치기
+const DiaryEditor = () => {
+  const { onCreate } = useContext(DiaryDispatchContext);
+
   const [state, setState] = useState({
     author: "",
     content: "",
